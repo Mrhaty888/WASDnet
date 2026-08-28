@@ -1,0 +1,44 @@
+body{
+    margin:0;
+    height: 100vh;
+    background: linear-gradient(145deg,#143a1f, #11471d, #109638);
+}
+
+
+
+.Introducao h1{
+    text-align: center;
+    text-decoration-color: aliceblue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:rgb(0, 255, 98);
+    font-size: 80px;
+    animation: apareca 1.5s ease-in-out forwards;
+    background: linear-gradient(145deg,#042225, #0b214b, #002550);
+    margin: 0;
+    padding: 50px;
+}
+.Introducao p{
+    text-align: center;
+    color:chartreuse;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    opacity: 0.1;
+    animation: apareca 2s ease-in-out forwards;
+}
+
+.entrada{
+    display: flex;
+    justify-content: end;
+    margin: 10px;
+    gap: 15px;
+    padding: 50px;
+}
+@keyframes apareca{
+    from{
+        transform: translateY(50px);
+        opacity:0;
+    }
+    to{
+        transform: translateY(0px);
+        opacity:1;
+    }
+}
