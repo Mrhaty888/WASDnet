@@ -1,19 +1,46 @@
+
+<?php
+// 1. ATIVAR A MEMÓRIA (Sempre na primeira linha do arquivo)
+session_start();
+
+// C - CREATE: Se o usuário enviou o formulário, guarda o nome na lista
+if (isset($_POST['nome_do_gamer'])) {
+    $_SESSION['lista_gamers'][] = $_POST['nome_do_gamer'];
+}
+
+// D - DELETE: Se o usuário clicou em excluir, apaga da lista
+if (isset($_GET['excluir'])) {
+    $id = $_GET['excluir'];
+    unset($_SESSION['lista_gamers'][$id]);
+}
+?>
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estetica.css"/>
-    <title>WASD.net</title>
+    <title>WASDnet - CRUD Base</title>
 </head>
 <body>
-    <div class="Introducao">
-        <h1>Bem vindo a WASDnet</h1>
-        <p>Serviço de cibersegurança dos gamers.</p>
-    </div>
-    <div class="entrada">
-        <button id="cadastro">Cadastro</button>
-        <button id="login">Login</button>
-    </div>
-    <script src="https://jsdelivr.net"></script>
+
+    <h1>WASDnet</h1>
+
+    <!-- FORMULÁRIO PARA CADASTRAR (CREATE) -->
+    <form method="POST" action="index.php">
+        <input type="text" name="nome_do_gamer" placeholder="Nome do Gamer" required>
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <h2>Gamers Cadastrados:</h2>
+    <ul>
+        <!-- R - READ: Loop que lê a lista e mostra na tela -->
+        <?php 
+        if (isset($_SESSION['lista_gamers'])) {
+            foreach ($_SESSION['lista_gamers'] as $id => $nome) {
+                echo "<li>" . $nome . " <a href='index.php?excluir=" . $id . "'>[X] Excluir</a></li>";
+            }
+        }
+        ?>
+    </ul>
+
 </body>
+</html>

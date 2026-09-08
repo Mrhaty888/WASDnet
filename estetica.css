@@ -32,6 +32,40 @@ body{
     gap: 15px;
     padding: 50px;
 }
+
+.entrada button{
+    padding: 12px 28px;
+    border-radius: 8px;
+    cursor:pointer;
+    transition: all 0.2s ease;
+}
+
+#cadastro{
+    color:rgb(0, 0, 0);
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: 0;
+    box-shadow: 1px 3px 5px rgb(0, 255, 98);
+}
+
+
+#cadastro:hover {
+  background-color: #078a5e;
+  transform: translateY(-2px);
+}
+#login{
+    background-color: aliceblue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    border: 0;
+    box-shadow: 1px 4px 6px rgb(47, 102, 253);
+}
+
+#login:hover{
+   background-color: #0a51d4;
+   transform: translatey(-2px);
+}
+
 @keyframes apareca{
     from{
         transform: translateY(50px);
