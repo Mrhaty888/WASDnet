@@ -1,45 +1,79 @@
-<?php
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WASDnet - Painel</title>
+    <!-- ESTA LINHA CONECTA O CSS: -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-session_start();
+<div class="container">
+    <?php
+    include 'conexao.php';
 
-if (isset($_GET['excluir'])){
-    $id_apagado = $_GET['excluir'];
+    session_start();
 
-    unset($_SESSION['Lista de usuarios'][$id_apagado]);
-    header("Location: Loginteste.php");
-    exit();
-}
+    if (isset($_GET['excluir'])){
+        $id_apagado = $_GET['excluir'];
 
-if (isset($_POST['usuario'])) {
+        unset($_SESSION['Lista de usuarios'][$id_apagado]);
+        header("Location: Loginteste.php");
+        exit();
+    }
+
+    if (isset($_POST['usuario'])) {
     $nome = $_POST['usuario'];
     $editado = $_POST['id_editar'];
-    if ($id_editar !== '') {
-        $_SESSION['Lista de usuarios'][$editado] = $nome;
+
+    if ($editado !== '') {
+        // Se já tem um ID para editar, atualiza no banco (U do CRUD)
+        $stmt = $pdo->prepare("UPDATE usuarios SET nome = ? WHERE id = ?");
+        $stmt->execute([$nome, $editado]);
     } else {
-        $_SESSION['Lista de usuarios'][] = $nome;
+        // Se o ID está vazio, é um cadastro novo (C do CRUD)
+        $stmt = $pdo->prepare("INSERT INTO usuarios (nome) VALUES (?)");
+        $stmt->execute([$nome]);
     }
 
     header("Location: Loginteste.php");
     exit();
 }
 
-
-?>
-<form method="POST" action="Loginteste.php">
-    <input type="hidden" name="id_editar" value="<?php echo(isset($_GET['editar'])) ? $_GET['editar'] : ''; ?>"> 
-    <input type="text" name="usuario" value="<?php echo (isset($_GET['editar']) && isset($_SESSION['Lista de usuarios'][$_GET['editar']])) ? $_SESSION['Lista de usuarios'][$_GET['editar']] : ''; ?>" required>
-    <button type="submit">Enviar</button>
-</form>
-<h2>Usuarios salvos:</h2>
-<ul>
-    <?php
-    if (isset($_SESSION['Lista de usuarios'])) {
-        foreach ($_SESSION['Lista de usuarios'] as $id => $nome) {
-            echo "<li>".$nome. "
-                <a href='Loginteste.php?editar=". $id . "'>[Editar]</a> 
-                <a href='Loginteste.php?excluir=". $id . "'>[X] Excluir</a>
-            </li>";
-        }
-    }
     ?>
-</ul>
+    <form method="POST" action="Loginteste.php">
+        <input type="hidden" name="id_editar" value="<?php echo(isset($_GET['editar'])) ? $_GET['editar'] : ''; ?>"> 
+        <input type="text" name="usuario" value="<?php echo (isset($_GET['editar']) && isset($_SESSION['Lista de usuarios'][$_GET['editar']])) ? $_SESSION['Lista de usuarios'][$_GET['editar']] : ''; ?>" required>
+        <button type="submit">Enviar</button>
+    </form>
+    <h2>Usuarios salvos:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome do user</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        // Faz uma consulta para pegar todos os usuários do banco de dados
+        $stmt = $pdo->query("SELECT * FROM usuarios");
+        $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Agora o foreach lê os dados que vieram do MySQL
+        foreach ($usuarios as $user) {
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($user['nome']) . "</td>";
+            echo "<td>";
+            echo "  <a href='Loginteste.php?editar=" . $user['id'] . "'>[Editar]</a> ";
+            echo "  <a href='Loginteste.php?excluir=" . $user['id'] . "'>[X] Excluir</a>";
+            echo "</td>";
+            echo "</tr>";
+        }
+        ?>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+body{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: rgb(255, 211, 101);
+    color:brown;
+    margin:0;
+    padding: 40px 20px;
+    display:flex;
+    justify-content: center;
+}
+
+.container{
+    width:100%;
+    max-width: 600px;
+    background-color: rgb(255, 251, 0);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+h2{
+    color: rgb(39, 39, 39);
+    text-align: center;
+    margin-top: 30px;
+}
