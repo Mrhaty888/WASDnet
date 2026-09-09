@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="menu-lateral">
+    <h1>WASDnet</h1>
+    <ul>
+        <li><a href="Loginteste.php" class="ativo">Dashboard</a></li>
+        <li><a href="#">Configurações</a></li>
+        <li><a href="#">Sair</a></li>
+    </ul>
+</div>
 
 <div class="container">
     <?php
@@ -18,8 +26,10 @@
     if (isset($_GET['excluir'])){
         $id_apagado = $_GET['excluir'];
 
-        unset($_SESSION['Lista de usuarios'][$id_apagado]);
-        header("Location: Loginteste.php");
+        $stmt = $pdo->prepare("DELETE FROM usuarios WHERE id = ?");
+        $stmt->execute([$id_apagado]);
+
+        header("location: Loginteste.php");
         exit();
     }
 
@@ -41,11 +51,16 @@
     exit();
 }
 
+$nomeEditar = '';
+    if (isset($_GET['editar'])) {
+        $stmt = $pdo->prepare("SELECT nome FROM usuarios WHERE id = ?");
+        $stmt->execute([$_GET['editar']]);
+        $nomeEditar = $stmt->fetchColumn();
+
     ?>
     <form method="POST" action="Loginteste.php">
         <input type="hidden" name="id_editar" value="<?php echo(isset($_GET['editar'])) ? $_GET['editar'] : ''; ?>"> 
-        <input type="text" name="usuario" value="<?php echo (isset($_GET['editar']) && isset($_SESSION['Lista de usuarios'][$_GET['editar']])) ? $_SESSION['Lista de usuarios'][$_GET['editar']] : ''; ?>" required>
-        <button type="submit">Enviar</button>
+        <input type="text" name="usuario" value="<?php echo htmlspecialchars($nomeEditar); ?>" required>
     </form>
     <h2>Usuarios salvos:</h2>
     <table>
