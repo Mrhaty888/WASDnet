@@ -22,8 +22,8 @@
         $tema = $_POST['tema'];
         $_SESSION['tema_escolhido'] = $tema;
         $mensagem='Configuração sucedida.';
-        $temaAtual= isset($_SESSION['tema_escolhido']) ? $_SESSION['tema_escolhido'] : 'claro';
       }
+      $temaAtual= isset($_SESSION['tema_escolhido']) ? $_SESSION['tema_escolhido'] : 'claro';
     ?>
     <h2>Configurações</h2>
     <?php if ($mensagem !== ''): ?>

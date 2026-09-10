@@ -12,7 +12,7 @@
     <h1>WASDnet</h1>
     <ul>
         <li><a href="Loginteste.php" class="ativo">Dashboard</a></li>
-        <li><a href="#">Configurações</a></li>
+        <li><a href="configuracoes.php">Configurações</a></li>
         <li><a href="#">Sair</a></li>
     </ul>
 </div>
