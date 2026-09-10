@@ -56,7 +56,7 @@ $nomeEditar = '';
         $stmt = $pdo->prepare("SELECT nome FROM usuarios WHERE id = ?");
         $stmt->execute([$_GET['editar']]);
         $nomeEditar = $stmt->fetchColumn();
-
+    }
     ?>
     <form method="POST" action="Loginteste.php">
         <input type="hidden" name="id_editar" value="<?php echo(isset($_GET['editar'])) ? $_GET['editar'] : ''; ?>"> 
@@ -85,7 +85,7 @@ $nomeEditar = '';
             echo "  <a href='Loginteste.php?excluir=" . $user['id'] . "'>[X] Excluir</a>";
             echo "</td>";
             echo "</tr>";
-        }
+        };
         ?>
         </tbody>
     </table>
