@@ -4,7 +4,10 @@ body{
     background: linear-gradient(145deg,#143a1f, #11471d, #109638);
 }
 
-
+body.tema-escuro{
+    background-color: #111111;
+    color:  #e2c312;
+}
 
 .Introducao h1{
     text-align: center;

@@ -7,7 +7,7 @@
     <!-- ESTA LINHA CONECTA O CSS: -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="<?php ($temaAtual == 'escuro') ? 'tema-escuro' : ''; ?>">
 <div class="menu-lateral">
     <h1>WASDnet</h1>
     <ul>
