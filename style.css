@@ -19,6 +19,30 @@ body.tema-escuro{
     color:  #e2c312;
 }
 
+.tema-escuro table {
+    background-color: #2a2a2a; /* Cor de fundo escura para a tabela */
+    color: #ffffff;            /* Texto branco dentro da tabela */
+    border-color: #444444;     /* Linhas divisórias mais escuras */
+}
+
+/* Deixa o cabeçalho da tabela combinando com o tema escuro */
+.tema-escuro th {
+    background-color: #3a3a3a;
+    color: #ffffff;
+}
+
+/* Muda a cor do campo de texto (input) onde você digita o usuário */
+.tema-escuro input[type="text"] {
+    background-color: #2a2a2a; /* Fundo escuro da lacuna */
+    color: #ffffff;            /* Texto branco ao digitar */
+    border: 1px solid #555555; /* Borda cinza sutil */
+}
+
+/* Ajusta os links de [Editar] e [X] Excluir para ficarem visíveis no fundo escuro */
+.tema-escuro table a {
+    color: #ffcc00; /* Cor amarelada/dourada para os links se destacarem */
+}
+
 /* 2. MENU LATERAL ANGELICAL */
 .menu-lateral {
     width: 260px;
@@ -64,7 +88,6 @@ body.tema-escuro{
     border-left: 3px solid #c5a059;
 }
 
-/* 3. CONTEÚDO PRINCIPAL */
 .container {
     flex: 1;
     padding: 50px;
@@ -82,7 +105,6 @@ h2 {
     padding-bottom: 10px;
 }
 
-/* 4. FORMULÁRIO ILUMINADO */
 form {
     display: flex;
     gap: 15px;
@@ -112,7 +134,7 @@ form input[type="text"]:focus {
 }
 
 form button {
-    background: linear-gradient(135deg, #d4af37, #c5a059); /* Degradê dourado metálico */
+    background: linear-gradient(135deg, #d4af37, #c5a059); 
     color: #ffffff;
     border: none;
     padding: 14px 28px;
@@ -129,7 +151,7 @@ form button:hover {
     box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
 }
 
-/* 5. TABELA DE USUÁRIOS (ESTILO PALÁCIO) */
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -162,7 +184,7 @@ td {
 }
 
 tr:hover td {
-    background-color: #fdfcf9; /* Efeito sutil ao passar o mouse na linha */
+    background-color: #fdfcf9; 
 }
 
 /* Links de Ações */
@@ -176,7 +198,7 @@ td a {
 }
 
 td a[href*="editar"] {
-    color: #b08d49; /* Dourado escuro para o editar */
+    color: #b08d49; 
 }
 
 td a[href*="editar"]:hover {
@@ -185,7 +207,7 @@ td a[href*="editar"]:hover {
 }
 
 td a[href*="excluir"] {
-    color: #c96868; /* Vermelho pastel suave para não quebrar a harmonia clareada */
+    color: #c96868; 
 }
 
 td a[href*="excluir"]:hover {

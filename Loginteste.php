@@ -1,29 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WASDnet - Painel</title>
-    <!-- ESTA LINHA CONECTA O CSS: -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="<?php ($temaAtual == 'escuro') ? 'tema-escuro' : ''; ?>">
-<div class="menu-lateral">
-    <h1>WASDnet</h1>
-    <ul>
-        <li><a href="Loginteste.php" class="ativo">Dashboard</a></li>
-        <li><a href="configuracoes.php">Configurações</a></li>
-        <li><a href="#">Sair</a></li>
-    </ul>
-</div>
-
-<div class="container">
-    <?php
-    include 'conexao.php';
-
-    session_start();
-
-    if (isset($_GET['excluir'])){
+<?php
+include 'conexao.php';
+session_start();
+$temaAtual = isset($_SESSION['tema_escolhido']) ? $_SESSION['tema_escolhido'] : 'claro';
+if (isset($_GET['excluir'])){
         $id_apagado = $_GET['excluir'];
 
         $stmt = $pdo->prepare("DELETE FROM usuarios WHERE id = ?");
@@ -38,11 +17,9 @@
     $editado = $_POST['id_editar'];
 
     if ($editado !== '') {
-        // Se já tem um ID para editar, atualiza no banco (U do CRUD)
         $stmt = $pdo->prepare("UPDATE usuarios SET nome = ? WHERE id = ?");
         $stmt->execute([$nome, $editado]);
     } else {
-        // Se o ID está vazio, é um cadastro novo (C do CRUD)
         $stmt = $pdo->prepare("INSERT INTO usuarios (nome) VALUES (?)");
         $stmt->execute([$nome]);
     }
@@ -57,7 +34,26 @@ $nomeEditar = '';
         $stmt->execute([$_GET['editar']]);
         $nomeEditar = $stmt->fetchColumn();
     }
-    ?>
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WASDnet - Painel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="<?php echo ($temaAtual == 'escuro') ? 'tema-escuro' : ''; ?>">
+<div class="menu-lateral">
+    <h1>WASDnet</h1>
+    <ul>
+        <li><a href="Loginteste.php" class="ativo">Dashboard</a></li>
+        <li><a href="configuracoes.php">Configurações</a></li>
+        <li><a href="#">Sair</a></li>
+    </ul>
+</div>
+
+<div class="container">
     <form method="POST" action="Loginteste.php">
         <input type="hidden" name="id_editar" value="<?php echo(isset($_GET['editar'])) ? $_GET['editar'] : ''; ?>"> 
         <input type="text" name="usuario" value="<?php echo htmlspecialchars($nomeEditar); ?>" required>
@@ -72,11 +68,9 @@ $nomeEditar = '';
         </thead>
         <tbody>
         <?php
-        // Faz uma consulta para pegar todos os usuários do banco de dados
         $stmt = $pdo->query("SELECT * FROM usuarios");
         $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // Agora o foreach lê os dados que vieram do MySQL
         foreach ($usuarios as $user) {
             echo "<tr>";
             echo "<td>" . htmlspecialchars($user['nome']) . "</td>";
