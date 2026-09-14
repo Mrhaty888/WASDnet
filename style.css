@@ -19,37 +19,60 @@ body.tema-escuro{
     color:  #e2c312;
 }
 
-.tema-escuro table {
+body.tema-escuro table {
     background-color: #2a2a2a; /* Cor de fundo escura para a tabela */
     color: #ffffff;            /* Texto branco dentro da tabela */
     border-color: #444444;     /* Linhas divisórias mais escuras */
 }
 
 /* Deixa o cabeçalho da tabela combinando com o tema escuro */
-.tema-escuro th {
+body.tema-escuro th {
     background-color: #3a3a3a;
     color: #ffffff;
 }
 
 /* Muda a cor do campo de texto (input) onde você digita o usuário */
-.tema-escuro input[type="text"] {
+body.tema-escuro input[type="text"] {
     background-color: #2a2a2a; /* Fundo escuro da lacuna */
     color: #ffffff;            /* Texto branco ao digitar */
     border: 1px solid #555555; /* Borda cinza sutil */
 }
 
 /* Ajusta os links de [Editar] e [X] Excluir para ficarem visíveis no fundo escuro */
-.tema-escuro table a {
+body.tema-escuro table a {
     color: #ffcc00; /* Cor amarelada/dourada para os links se destacarem */
 }
 
+body.tema-escuro select {
+    background-color: #2a2a2a !important; /* Fundo escuro igual aos inputs */
+    color: #ffffff !important;            /* Texto da opção em branco */
+    border: 1px solid #555555 !important; /* Borda cinza sutil */
+    padding: 6px 10px !important;         /* Espaçamento interno para ficar elegante */
+    border-radius: 4px !important;        /* Cantos arredondados */
+    cursor: pointer !important;
+}
+
+/* Garante que as opções de dentro da lista também fiquem escuras */
+body.tema-escuro select option {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+}
+
 /* 2. MENU LATERAL ANGELICAL */
-.menu-lateral {
+body.menu-lateral {
     width: 260px;
     background-color: #ffffff;
     padding: 30px 20px;
     border-right: 1px solid #e8e2d5;
     box-shadow: 5px 0 25px rgba(212, 175, 55, 0.05); /* Sombra dourada bem suave */
+}
+
+body.tema-escuro .menu-lateral {
+    width: 260px;
+    background-color: #1b1b1b !important;
+    padding: 30px 20px;
+    border-right: 1px solid #5a3e00 !important;
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5) !important; 
 }
 
 .menu-lateral h1 {
@@ -86,6 +109,15 @@ body.tema-escuro{
     font-weight: 600;
     padding-left: 20px;
     border-left: 3px solid #c5a059;
+}
+
+body.tema-escuro .menu-lateral ul li a:hover, 
+body.tema-escuro .menu-lateral ul li a.ativo {
+    background-color: #2a2a2a !important; /* Fundo cinza escuro */
+    color: #ffcc00 !important;            /* Texto amarelo dourado brilhante */
+    font-weight: 600;
+    padding-left: 20px;
+    border-left: 3px solid #ffcc00 !important; /* Barrinha da esquerda amarela */
 }
 
 .container {
